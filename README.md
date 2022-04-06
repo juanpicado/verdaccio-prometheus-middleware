@@ -73,13 +73,13 @@ is an example `Dockerfile` that can be used to build a custom image containing t
 # Use an alpine node image to install the plugin
 FROM node:lts-alpine as builder
 
-# Install the metrics middleware plugin
+# Install the metrics middleware plugin. Replace `x.y.z` with the plugin version.
 RUN mkdir -p /verdaccio/plugins \
     && cd /verdaccio/plugins \
-    && npm install --global-style --no-bin-links --no-optional @xlts.dev/verdaccio-prometheus-middleware@1.0.0
+    && npm install --global-style --no-bin-links --no-optional @xlts.dev/verdaccio-prometheus-middleware@x.y.z
 
 # The final built image will be based on the standard Verdaccio docker image.
-FROM verdaccio/verdaccio:5.2.0
+FROM verdaccio/verdaccio:5
 
 # Copy the plugin files over from the 'builder' node image.
 # The `$VERDACCIO_USER_UID` env variable is defined in the base `verdaccio/verdaccio` image.
